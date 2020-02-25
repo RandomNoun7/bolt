@@ -77,6 +77,7 @@ module Bolt
     private :help?
 
     def parse
+      require 'bolt/bolt_option_parser'
       parser = BoltOptionParser.new(options)
       # This part aims to handle both `bolt <mode> --help` and `bolt help <mode>`.
       remaining = handle_parser_errors { parser.permute(@argv) } unless @argv.empty?
