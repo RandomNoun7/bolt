@@ -777,6 +777,7 @@ module Bolt
         @options[:help] = true
       end
       define('--version', 'Display the version') do |_|
+        require 'bolt/version'
         puts Bolt::VERSION
         raise Bolt::CLIExit
       end
