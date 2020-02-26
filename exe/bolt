@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require 'bolt'
+# require 'bolt'
 require 'bolt/cli'
 
 cli = Bolt::CLI.new(ARGV)

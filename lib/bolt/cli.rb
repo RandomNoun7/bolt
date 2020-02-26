@@ -11,12 +11,10 @@
 # require 'optparse'
 # require 'bolt/analytics'
 # require 'bolt/bolt_option_parser'
-# require 'bolt/config'
 # require 'bolt/error'
 # require 'bolt/executor'
 # require 'bolt/inventory'
 # require 'bolt/rerun'
-# require 'bolt/logger'
 # require 'bolt/outputter'
 # require 'bolt/puppetdb'
 # require 'bolt/plugin'
@@ -26,6 +24,8 @@
 # require 'bolt/secret'
 
 module Bolt
+  autoload :Logger, 'bolt/logger'
+  autoload :Config, 'bolt/config'
   class CLIExit < StandardError; end
   class CLI
     COMMANDS = { 'command' => %w[run],
@@ -43,10 +43,10 @@ module Bolt
     attr_reader :config, :options
 
     def initialize(argv)
-      Bolt::Logger.initialize_logging
+      Logger.initialize_logging
       @logger = Logging.logger[self]
       @argv = argv
-      @config = Bolt::Config.default
+      @config = Config.default
       @options = {}
     end
 
@@ -113,17 +113,17 @@ module Bolt
       validate(options)
 
       @config = if options[:configfile]
-                  Bolt::Config.from_file(options[:configfile], options)
+                  Config.from_file(options[:configfile], options)
                 else
                   boltdir = if options[:boltdir]
                               Bolt::Boltdir.new(options[:boltdir])
                             else
                               Bolt::Boltdir.find_boltdir(Dir.pwd)
                             end
-                  Bolt::Config.from_boltdir(boltdir, options)
+                  Config.from_boltdir(boltdir, options)
                 end
 
-      Bolt::Logger.configure(config.log, config.color)
+      Logger.configure(config.log, config.color)
 
       # Logger must be configured before checking path case, otherwise warnings will not display
       @config.check_path_case('modulepath', @config.modulepath)
