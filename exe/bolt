@@ -3,6 +3,7 @@
 
 # require 'bolt'
 require 'bolt/cli'
+require 'bolt/error'
 
 cli = Bolt::CLI.new(ARGV)
 begin

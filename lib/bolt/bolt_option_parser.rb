@@ -601,19 +601,19 @@ module Bolt
       @warnings = []
 
       separator "\nINVENTORY OPTIONS"
-      define('-t', '--targets TARGETS',
-             'Identifies the targets of command.',
-             'Enter a comma-separated list of target URIs or group names.',
-             "Or read a target list from an input file '@<file>' or stdin '-'.",
-             'Example: --targets localhost,target_group,ssh://nix.com:23,winrm://windows.puppet.com',
-             'URI format is [protocol://]host[:port]',
-             "SSH is the default protocol; may be #{TRANSPORTS.keys.join(', ')}",
-             'For Windows targets, specify the winrm:// protocol if it has not be configured',
-             'For SSH, port defaults to `22`',
-             'For WinRM, port defaults to `5985` or `5986` based on the --[no-]ssl setting') do |targets|
-        @options[:targets] ||= []
-        @options[:targets] << get_arg_input(targets)
-      end
+      # define('-t', '--targets TARGETS',
+      #        'Identifies the targets of command.',
+      #        'Enter a comma-separated list of target URIs or group names.',
+      #        "Or read a target list from an input file '@<file>' or stdin '-'.",
+      #        'Example: --targets localhost,target_group,ssh://nix.com:23,winrm://windows.puppet.com',
+      #        'URI format is [protocol://]host[:port]',
+      #        "SSH is the default protocol; may be #{TRANSPORTS.keys.join(', ')}",
+      #        'For Windows targets, specify the winrm:// protocol if it has not be configured',
+      #        'For SSH, port defaults to `22`',
+      #        'For WinRM, port defaults to `5985` or `5986` based on the --[no-]ssl setting') do |targets|
+      #   @options[:targets] ||= []
+      #   @options[:targets] << get_arg_input(targets)
+      # end
       define('-q', '--query QUERY', 'Query PuppetDB to determine the targets') do |query|
         @options[:query] = query
       end
@@ -729,10 +729,10 @@ module Bolt
       end
 
       separator "\nTRANSPORT OPTIONS"
-      define('--transport TRANSPORT', TRANSPORTS.keys.map(&:to_s),
-             "Specify a default transport: #{TRANSPORTS.keys.join(', ')}") do |t|
-        @options[:transport] = t
-      end
+      # define('--transport TRANSPORT', TRANSPORTS.keys.map(&:to_s),
+      #        "Specify a default transport: #{TRANSPORTS.keys.join(', ')}") do |t|
+      #   @options[:transport] = t
+      # end
       define('--connect-timeout TIMEOUT', Integer, 'Connection timeout (defaults vary)') do |timeout|
         @options[:'connect-timeout'] = timeout
       end

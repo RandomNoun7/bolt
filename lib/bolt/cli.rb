@@ -43,10 +43,10 @@ module Bolt
     attr_reader :config, :options
 
     def initialize(argv)
-      Logger.initialize_logging
-      @logger = Logging.logger[self]
+      #Logger.initialize_logging
+      #@logger = Logging.logger[self]
       @argv = argv
-      @config = Config.default
+      #@config = Config.default
       @options = {}
     end
 
